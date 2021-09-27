@@ -36,12 +36,6 @@ public:
                 curr = curr->next;
             }
         }
-        cout<<curr->val;
-        if(curr->next !=NULL){
-            if(curr->next!=NULL and curr->next->val == val){
-            curr->next = NULL;
-        }
-        }
         
         return head;
     }
