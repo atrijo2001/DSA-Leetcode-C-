@@ -1,51 +1,21 @@
 class Solution {
 public:
-    
-    int binary_search(vector<int>nums, int start, int end, int target){
-        while(start<=end){
-            int mid = start + (end-start)/2;
-            if(nums[mid] == target){
-                return mid;
-            } else if(nums[mid]>target){
-                end = mid-1;
-            } else{
-                start = mid+1;
+    int helper(vector<int> &v, int target, int s, int e){
+        if(s>e) return -1;
+        int m = s + (e-s)/2;
+        if(v[m] == target) return m;
+        if(v[s]<=v[m]){
+            if((target>=v[s]) and (target<=v[m])){
+             return helper(v, target, s, m-1);
             }
+            else return helper(v, target, m+1, e);
         }
-        return -1;
-    }
-    
-    int find_peak(vector<int> nums, int start, int end){
-        while(start<=end){
-            
-            int mid = start + (end-start)/2;
-            if(mid<end and nums[mid]>nums[mid+1]){
-                return mid;
-            }
-            if(mid>start and nums[mid]<nums[mid-1]){
-                return mid-1;
-            }
-            if(nums[mid]<=nums[start]){
-                end = mid-1;
-            } else{
-                start = mid+1;
-            }
+        if(target>=v[m] and target<=v[e]){
+            return helper(v, target, m+1, e);
         }
-        return -1;
+        return helper(v, target, s, m-1);
     }
     int search(vector<int>& nums, int target) {
-        int peak = find_peak(nums, 0, nums.size()-1);
-        if(peak == -1){
-            return binary_search(nums, 0, nums.size()-1, target);
-        }
-        if(nums[peak]==target){
-            return peak;
-        }
-        
-        if(target >=nums[0]){
-            return binary_search(nums, 0, peak-1, target);
-        }else{
-            return binary_search(nums, peak+1, nums.size()-1, target); 
-        }
+        return helper(nums, target, 0, nums.size()-1);
     }
 };
