@@ -8,7 +8,7 @@ public:
             }
             return;
         }
-        if(target>0){
+        if(v[idx]<=target){
             ds.push_back(v[idx]);
             helper(v, idx, target-v[idx], ds);
             
