@@ -4,7 +4,7 @@ public:
         int m = grid.size();
         int n = grid[0].size();
         if(i==m-1 and j==n-1) return grid[m-1][n-1];
-        if(i>m-1 or j>n-1) return 9999;
+        if(i>m-1 or j>n-1) return 696969;
         if(dp[i][j]!=-1) return dp[i][j];
         int left = helper(grid, dp, i+1, j) + grid[i][j];
         int down = helper(grid, dp, i, j+1) + grid[i][j];
