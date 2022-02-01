@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    void helper(TreeNode* root, int maxi, int& good){
-        if(!root) return;
+    int helper(TreeNode* root, int maxi){
+        if(!root) return 0;
         if(maxi<=root->val){
             maxi = root->val;
-            good++;
+            return 1+helper(root->left, maxi)+helper(root->right, maxi);
+        } else{
+            return helper(root->left, maxi)+helper(root->right, maxi);
         }
-        helper(root->left, maxi, good);
-        helper(root->right, maxi, good);
     }
     int goodNodes(TreeNode* root) {
         int maxi = INT_MIN;
-        int good = 0;
-        helper(root, maxi, good);
-        return good;
+        // int good = 0;
+        return helper(root, maxi);
+        // return good;
     }
 };
